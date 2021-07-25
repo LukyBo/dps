@@ -57,3 +57,7 @@ model = Prophet()
 model.fit(df_alk)
 future = model.make_future_dataframe(periods=12, freq='30d') # fit monthly data and make monthly forecasts for the next 12 months
 forecast = model.predict(future)
+
+# save as bin file
+with open('forecast_model.bin', 'wb') as fout:
+    pickle.dump(model, fout)
