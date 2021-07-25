@@ -38,3 +38,12 @@ df['ds']=pd.to_datetime(df[['Year', 'Month', 'Day']]) # Obtain a datetime column
 df.drop(['VORJAHRESWERT','VERAEND_VORMONAT_PROZENT','VERAEND_VORJAHRESMONAT_PROZENT', 'ZWOELF_MONATE_MITTELWERT', 'Day'],axis=1 ,inplace=True) # Drop unnecessary columns
 df = df.rename(columns={'Value': 'y'}) # renamed the column for the later use in Model
 df = df.loc[(df['Accident-type'] == 'insgesamt')]
+
+# Create df for 'Alkoholunfälle'
+df_alk = df.loc[(df['Category'] == 'Alkoholunf�lle')]
+
+# Create df for 'Fluchtunfälle'
+df_flucht = df.loc[(df['Category'] == 'Fluchtunf�lle')]
+
+# Create df for 'Verkehrsunfälle'
+df_verkehr = df.loc[(df['Category'] == 'Verkehrsunf�lle')]
