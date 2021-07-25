@@ -22,8 +22,8 @@ import pickle
 
 
 # load data
-df = pd.read_csv('../Input/Monatszahlen_Verkehrsunfälle.csv', delimiter=';')
-
+df = pd.read_csv('Input/Monatszahlen_Verkehrsunfälle.csv', delimiter=';')
+# ../
 
 # Data cleansing and adaption
 df = df[df.Month != 'Summe'] # Drop unnecessary rows
