@@ -47,3 +47,6 @@ df_flucht = df.loc[(df['Category'] == 'Fluchtunf�lle')]
 
 # Create df for 'Verkehrsunfälle'
 df_verkehr = df.loc[(df['Category'] == 'Verkehrsunf�lle')]
+
+# Generate plot for the number of accidents per category
+MyPlots.historically_data(df_alk, df_flucht, df_verkehr)
