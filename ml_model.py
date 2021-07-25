@@ -23,3 +23,18 @@ import pickle
 
 # load data
 df = pd.read_csv('../Input/Monatszahlen_Verkehrsunfälle.csv', delimiter=';')
+
+
+# Data cleansing and adaption
+df = df[df.Month != 'Summe'] # Drop unnecessary rows
+#df = df[df.Year != 2021]
+df = df.sort_values(by ='Month' , ascending=True) # Sort values by time
+df1 = df['Month'].str.extract('.*(\d{2})', expand = False) # Change Month Column to numbers between 1-12 and safe to df1
+df = df.assign(Month=df1[:]) # Replace column 'Month' of df with column of df1
+df["Month"] = pd.to_numeric(df["Month"]) # Change the non-numeric objects into integers
+df[['Category', 'Accident-type']] = df[['Category', 'Accident-type']].astype(pd.StringDtype()) # Change the non-string objects into strings to be able to filter the df
+df["Day"] = 15 # Create Column for days as datetime needs days as input
+df['ds']=pd.to_datetime(df[['Year', 'Month', 'Day']]) # Obtain a datetime column to be able to visualise historically the number of accidents 
+df.drop(['VORJAHRESWERT','VERAEND_VORMONAT_PROZENT','VERAEND_VORJAHRESMONAT_PROZENT', 'ZWOELF_MONATE_MITTELWERT', 'Day'],axis=1 ,inplace=True) # Drop unnecessary columns
+df = df.rename(columns={'Value': 'y'}) # renamed the column for the later use in Model
+df = df.loc[(df['Accident-type'] == 'insgesamt')]
