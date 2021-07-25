@@ -50,3 +50,10 @@ df_verkehr = df.loc[(df['Category'] == 'Verkehrsunf�lle')]
 
 # Generate plot for the number of accidents per category
 MyPlots.historically_data(df_alk, df_flucht, df_verkehr)
+
+## Build Model with Prophet and forecast the accidents for 2021 for the category 'Alkoholunfälle'
+
+model = Prophet()
+model.fit(df_alk)
+future = model.make_future_dataframe(periods=12, freq='30d') # fit monthly data and make monthly forecasts for the next 12 months
+forecast = model.predict(future)
