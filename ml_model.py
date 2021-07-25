@@ -19,3 +19,7 @@ import pandas as pd
 import MyPlots
 from prophet import Prophet
 import pickle
+
+
+# load data
+df = pd.read_csv('../Input/Monatszahlen_Verkehrsunfälle.csv', delimiter=';')
